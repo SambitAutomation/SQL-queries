@@ -232,7 +232,7 @@ ANSWER : SELECT WORKER_ID, FIRST_NAME, LAST_NAME, SALARY, JOINING_DATE, DEPARTME
 
 Q-30. Write an SQL query to show records from one table that another table does not have.
 
-ANSWER :  
+ANSWER :  select * from worker where worker_id not in ( select worker_id from worker w inner join title t on w.worker_id = t.worker_ref_id );
 ---------------------------------------------------------------------------------------------------------    
 
 
