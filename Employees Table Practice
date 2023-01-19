@@ -1,0 +1,30 @@
+CREATE TABLE EmployeeDetails ( EmpId int(5), FullName varchar(20), ManagerId int(5), DateOfJoining date, City varchar(10) );
+
+INSERT INTO EmployeeDetails values ( 121, 'John Snow', 321, '2019-01-31', 'Toronto' );
+INSERT INTO EmployeeDetails values ( 321, 'Walter White', 986, '2020-01-30', 'California' );
+INSERT INTO EmployeeDetails values ( 421, 'Kuldeep Rana', 876, '2021-11-27', '	New Delhi' );
+
+SELECT * FROM EmployeeDetails;
+
+CREATE TABLE EmployeeSalary ( EmpId int(5), PROJECT varchar(2), Salary int(5), Variable int(5) );
+
+INSERT INTO EmployeeSalary values ( 121, 'P1', 8000, 500 );
+INSERT INTO EmployeeSalary values ( 321, 'P2', 10000, 1000 );
+INSERT INTO EmployeeSalary values ( 421, 'P1', 12000, 0 );
+
+SELECT * FROM EmployeeSalary;
+
+Questions :-
+
+
+1.Write an SQL query to fetch the EmpId and FullName of all the employees working under the Manager with id – ‘986’.
+
+Ans : SELECT  EmpId, FullName FROM EmployeeDetails WHERE ManagerId = 986;
+
+2.Write an SQL query to fetch the different projects available from the EmployeeSalary table.
+
+Ans : SELECT DISTINCT(Project) FROM EmployeeSalary;
+
+3.Write an SQL query to fetch the count of employees working in project ‘P1’.
+
+Ans : SELECT COUNT(*)  FROM EmployeeSalary  WHERE Project = 'P1';
