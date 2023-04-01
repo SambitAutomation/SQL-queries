@@ -23,95 +23,121 @@ insert into EmployeePosition values(1, 'Executive', '2022-05-01', 300000);
 select * from EmployeePosition;
 
 1.Write a query to fetch the EmpFname from the EmployeeInfo table in the upper case and use the ALIAS name as EmpName.
+
 Ans :- select upper(EmpFname) as EmpName from EmployeeInfo;
 
 2.Write a query to fetch the number of employees working in the department ‘HR’.
+
 Ans :- select count(*) from EmployeeInfo where Department = 'HR';
 
 3.Write a query to get the current date.
+
 And:- select curdate();
 
 4.Write a query to retrieve the first four characters of  EmpLname from the EmployeeInfo table.
+
 Ans:- select substr(EmpLname, 1, 4) from EmployeeInfo;
 
 5.Write a query to fetch only the place name(string before brackets) from the Address column of EmployeeInfo table.
+
 Ans:- SELECT MID(Address, 0, LOCATE('(',Address)) FROM EmployeeInfo;
 
 6.Write a query to create a new table that consists of data and structure copied from the other table.
+
 Ans:- create table NewTable  as select * from EmployeeInfo;
 
 7.Write q query to find all the employees whose salary is between 50000 to 100000.
+
 Ans:- select * from EmployeePosition where salary between 50000 and 100000;
 
 8.Write a query to find the names of employees that begin with ‘S’
+
 Ans:- select EmpFname from EmployeeInfo where EmpFname like 'S%';
 
 9.Write a query to fetch top N records.
+
 Ans:- SELECT * FROM EmployeePosition ORDER BY Salary DESC;
 
-10.Write a query to retrieve the EmpFname and EmpLname in a single column as “FullName”. 
-   The first name and the last name must be separated with space.
+10.Write a query to retrieve the EmpFname and EmpLname in a single column as “FullName”. The first name and the last name must be separated with space.
+
 Ans:- select concat(EmpFname, ' ', EmpLname) as FullName from EmployeeInfo;
    
- 11.Write a query find number of employees whose DOB is between 02/05/1970 to 31/12/1975 and are grouped according to gender
- Ans:- select count(*), gender from EmployeeInfo where DOB between '02/05/1970 ' AND '31/12/1975' group by gender;
+11.Write a query find number of employees whose DOB is between 02/05/1970 to 31/12/1975 and are grouped according to gender
+
+Ans:- select count(*), gender from EmployeeInfo where DOB between '02/05/1970 ' AND '31/12/1975' group by gender;
  
- 12.Write a query to fetch all the records from the EmployeeInfo table ordered by EmpLname in descending order and Department
-    in the ascending order.
+12.Write a query to fetch all the records from the EmployeeInfo table ordered by EmpLname in descending order and Department in the ascending order.
+
 Ans:- select EmpLname, Department from EmployeeInfo order by EmpLname desc , Department asc;
 
 13.Write a query to fetch details of employees whose EmpLname ends with an alphabet ‘A’ and contains five alphabets.
+
 Ans:- select * from EmployeeInfo where EmpLname like '____A';
    
-14. Write a query to fetch details of all employees excluding the employees with first names, 
-    “Sanjay” and “Sonia” from the EmployeeInfo table.
+14. Write a query to fetch details of all employees excluding the employees with first names, “Sanjay” and “Sonia” from the EmployeeInfo table.
+
 Ans:- select * from EmployeeInfo where EmpFname not in ('Sanjay', 'Sonia');
  
 15.Write a query to fetch details of employees with the address as “DELHI(DEL)”
+
 Ans:- select * from EmployeeInfo where Address = 'DEL';
   
 16.Write a query to fetch all employees who also hold the managerial position.
+
 Ans:- select e.EmpFname, p.salary, p.EmpPosition from EmployeeInfo e inner join EmployeePosition p on e.empid = p.empid and  EmpPosition = 'Manager';
    
 17.Write a query to fetch the department-wise count of employees sorted by department’s count in ascending order.
+
 Ans:- select department, count(*) from  EmployeeInfo group by Department order by count(*) asc;
    
 18.Write a query to calculate the even and odd records from a table.
+
 Ans:- SELECT EmpID, empfname FROM EmployeeInfo where mod(empid, 2) = 0; -> Even record
 	  SELECT EmpID, empfname FROM EmployeeInfo where mod(empid, 2) <> 0; -> Even record
       
 19.Write a SQL query to retrieve employee details from EmployeeInfo table who have a date of joining in the EmployeePosition table.
+
 Ans:- select * from EmployeeInfo e where exists ( select DateOfJoining from EmployeePosition p where e.empid = p.empid);
 
 20.Write a query to retrieve two minimum and maximum salaries from the EmployeePosition table
+
 Ans:- select  min(salary) from EmployeePosition  group by salary order by min(salary) asc limit 2;
 
 21.Write a query to find the Nth highest salary from the table without using TOP/limit keyword.
+
 Ans:- select salary  from EmployeePosition e1 where 0 = ( select count(distinct salary) from EmployeePosition e2 where e2.salary > e1.salary);
   
  22.Write a query to retrieve duplicate records from a table.
+ 
  Ans:- SELECT EmpID, EmpFname, Department ,COUNT(*) FROM EmployeeInfo GROUP BY EmpID, EmpFname, Department  HAVING COUNT(*) > 1;
 
 23.Write a query to retrieve the list of employees working in the same department.
+
 Ans:- select distinct e1.EmpFname, e1.department from EmployeeInfo e1 , EmployeeInfo e2 where e1.department = e2.department and e1.empid != e2.empid;
 
 24.Write a query to retrieve the last 3 records from the EmployeeInfo table.
+
 Ans:- select * from EmployeeInfo order by empid desc limit 3;
 
 25.Write a query to find the third-highest salary from the EmpPosition table.
+
 Ans:- select salary  from EmployeePosition e1 where 2 = ( select count(distinct salary) from EmployeePosition e2 where e2.salary > e1.salary);
   
 26.Write a query to display the first and the last record from the EmployeeInfo table.
+
 Ans:- select * from EmployeeInfo where empid = ( select min(empid) from EmployeeInfo ); -> First Row
       select * from EmployeeInfo where empid = ( select max(empid) from EmployeeInfo ); -> Last Row
       
 27.Write a query to retrieve Departments who have less than 2 employees working in it.
+
 Ans:- select department, count(*) from EmployeeInfo group by department having count(*) < 2;
 
 28.Write a query to retrieve EmpPostion along with total salaries paid for each of them.
+
 Ans:- select EmpPosition, sum(salary) from EmployeePosition group by EmpPosition ;
       
 29.Write a query to fetch 50% records from the EmployeeInfo table.
+
 Ans:- select * from  EmployeeInfo where empid <= ( select count(empid) / 2 from EmployeeInfo) ;
 
 
